@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Detect Frames";
+    var err = ViewBag.Error;
+    var res = ViewBag.Result;
+    var succ = ViewBag.Success;
+}
+
+<form method="post">
+    Video url: <input type="text" class="form-group" style="width:60%;" required id="videoUrl" name="video" onkeyUp="btnEvent();"/>
+    <input type="submit" id="detect" class="btn-info" asp-controller="Motion" asp-action="DetectFrames" value="Start" disabled="disabled" onclick="downloadBtnEvent();"/>
+</form>
+<span style="color:red">
+    @if (err != null)
+    {
+        @err;
+    }
+</span>
+<span style="color:green">
+    @if(succ != null)
+    {
+        @succ;
+    }
+</span>
+
+<br />
+<form method="get">
+    <input type="hidden" id="videoBytes" value="@res" name="videoPath"/>
+    <input type="submit" id="download" class="btn-success" asp-controller="Motion" asp-action="Download" value="Download"/>
+</form>
+
+<script type="text/javascript">
+
+    function btnEvent() {
+        var videoUrl = document.getElementById("videoUrl").value;
+        var detectBtn = document.getElementById("detect");
+        if (videoUrl.trim() != "") {
+            detectBtn.disabled = false;
+        }
+        else {
+            detectBtn.disabled = true;
+        }
+    }
+</script>

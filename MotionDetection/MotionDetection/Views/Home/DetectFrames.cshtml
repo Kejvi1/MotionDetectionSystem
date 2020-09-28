@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Detect Frames";
+    var res = ViewBag.Result;
+}
+
+    <form method="post">
+        Video url: <input type="text" name="video"/>
+        <input type="submit" asp-controller="Home" asp-action="DetectFrames" value="Start" />
+    </form>
+@if(res != null)
+ {
+   @res;
+ }
